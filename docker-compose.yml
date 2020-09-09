@@ -30,9 +30,9 @@ services:
             - SERVICE_TAGS=dev
 
         working_dir: /app
-        volumes:
+        #volumes:
         #    - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
-            - ./laravel-app:/app
+        #    - ./laravel-app:/app
 
         depends_on:
             - database
