@@ -4,7 +4,7 @@ IFS=$'\n'
 
 nomes=
 initial_id=
-if [ "$(wget -qc -O - http://localhost/clientes.json | wc -c)" -lt 5 ]; then
+if [ $(wget -qc -O - http://localhost/clientes.json | wc -c) -lt 5 ]; then
     nomes="Fernando Abreu\nRicardo Alves\nBruno Lima\nAndre Brasiliano\nMichèle Roy-Coste\n"
     initial_id=101
 else
