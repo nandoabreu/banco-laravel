@@ -1,0 +1,60 @@
+version: '3'
+services:
+    proxy:
+        container_name: banco-proxy
+        image: nginx:alpine
+        volumes:
+            - ./nginx/:/etc/nginx/conf.d/
+            - ./laravel-app:/app
+
+        ports:
+            - "80:80"
+            - "443:443"
+
+        restart: unless-stopped
+        #stdin_open: true
+        tty: true
+
+        depends_on:
+            - app
+
+    app:
+        container_name: banco-app
+        image: php:7.4-fpm
+        build:
+            context: .
+            dockerfile: Dockerfile
+
+        environment:
+            - SERVICE_NAME=app
+            - SERVICE_TAGS=dev
+
+        working_dir: /app
+        volumes:
+        #    - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+            - ./laravel-app:/app
+
+        depends_on:
+            - database
+
+        restart: unless-stopped
+        #stdin_open: true
+        tty: true
+
+    database:
+        container_name: banco-database
+        image: postgres:13-alpine
+        environment:
+            - POSTGRES_DB=banco
+            - POSTGRES_USER=banco
+            - POSTGRES_PASSWORD=b4nc0_d8
+
+        volumes:
+            - ./postgres:/var/lib/postgresql/data
+
+        ports:
+            - "5432:5432"
+
+        restart:
+            unless-stopped
+
