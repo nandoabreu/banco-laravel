@@ -1,7 +1,7 @@
 .PHONY: build up down
 
 build:
-	docker-compose up --build
+	docker-compose build --force-rm | grep Step
 
 up:
 	docker-compose up --remove-orphans -d

@@ -20,7 +20,8 @@ services:
 
     app:
         container_name: banco-app
-        image: php:7.4-fpm
+        #image: php:7.4-fpm
+        image: banco:app
         build:
             context: .
             dockerfile: Dockerfile
