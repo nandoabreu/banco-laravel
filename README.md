@@ -8,6 +8,7 @@ __wget__ e __sed__ devem estar instalado antes de rodar `make up`
 
 `make build`  
 `make up`
+`make test`
 
 
 ## Acessos via navegador
